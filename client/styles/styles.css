@@ -117,6 +117,7 @@ input[type=submit]:hover {
 
 select {
   margin: 21px 5px;
+  padding-top: 2px;
   width: 40%;
   outline: none;
   border-radius: none;
@@ -155,4 +156,3 @@ select {
     color: #fff;
     background-color: #0090da;
 }
-
