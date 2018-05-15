@@ -1,0 +1,158 @@
+
+@font-face {
+  font-family: 'Krungthep';
+  src: url('Krungthep.ttf') format('truetype');
+}
+
+* {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  background: black;
+  text-align: center;
+  color: white;
+  font-family: 'Krungthep', arial, sans-serif;
+}
+
+#main, #chats {
+  padding: 15px;
+  max-width: 500px;
+  margin: auto;
+  text-align: left;
+  background: black;
+  padding: 50px 60px;
+  border-top: 3px solid #18e739;
+  box-shadow: 0 0  3px 1px #18e739;
+}
+
+#main h1 {
+    margin-top: 0;
+    font-size: 35px;
+    margin-bottom: 5px;
+    padding: 5px;
+}
+
+#main h1 span {
+    font-style:italic;
+}
+
+#main ul {
+    padding-left: 20px;
+}
+
+#main .error {
+    border: 1px solid red;
+    background: #FDEFF0;
+    padding: 20px;
+}
+
+#main .success {
+    margin-top: 25px;
+}
+
+#main .success code {
+    font-size: 12px;
+    color: green;
+    line-height: 13px;
+}
+
+#borderimg2 {
+  padding: 30px 0;
+  border-top: 12px solid black;
+  -webkit-border-image: url('https://www.dropbox.com/s/15yibtsgxw8ragi/border.png?raw=1') 38% round; /* Safari 3.1-5 */
+  -o-border-image: url('https://www.dropbox.com/s/15yibtsgxw8ragi/border.png?raw=1') 38% round; /* Opera 11-12.1 */
+  border-image: url('https://www.dropbox.com/s/15yibtsgxw8ragi/border.png?raw=1') 38% round;
+  max-width: 1080px;
+  margin: 50px auto;
+}
+
+.username {
+  color: #18af09;
+}
+
+form {
+  padding: 20px;
+  padding-left: 0;
+  margin-bottom: 20px;
+  border-top: 1px solid #888888;
+  border-bottom: 1px solid #888888;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  height: 90px;
+}
+
+form input[type=textarea] {
+  margin-right: 10px;
+  width: 70%;
+  height: 45px;
+  box-sizing: border-box;
+  outline: none;
+  padding: 10px;
+  font-family: Helvetica;
+  font-weight: 100;
+  font-size: 15px;
+  filter: invert(1);
+}
+
+input[type=submit] {
+  background-image: url('https://www.dropbox.com/s/mowwiz0k3s7dkco/arrow.png?raw=1');
+  cursor: pointer;
+  background-size: 100%;
+  width: 45px;
+  height: 45px;
+  border: none;
+  color: transparent;
+  background-color: white;
+  transition: 0.1s ease-in;
+  filter: invert(1);
+}
+
+input[type=submit]:hover {
+  opacity: 0.4;
+}
+
+select {
+  margin: 21px 5px;
+  width: 40%;
+  outline: none;
+  border-radius: none;
+  background: none;
+  box-shadow: none;
+  filter: invert(1);
+  overflow: hidden;
+}
+
+.chat {
+    padding: 5px;
+    margin-bottom: 5px;
+    background-color: #eee;
+}
+
+.chat .username {
+    font-weight: 800px;
+    color:blue;
+}
+
+.chat:hover {
+    background-color: #ddd;
+}
+
+.spinner {
+    float: right;
+    height: 46px;
+    margin-bottom: 5px;
+}
+
+.spinner img {
+    padding: 10px;
+}
+
+.friend {
+    color: #fff;
+    background-color: #0090da;
+}
+

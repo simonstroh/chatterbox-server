@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>chatterbox</title>
+    <link rel="stylesheet" href="styles/styles.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="favicon.png" />
+    <style>
+      html, body {
+        width: 100%;
+        height: 100%;
+      }
+    </style>
+    <!-- dependencies -->
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/underscore/underscore.js"></script>
+    <script>
+      // YOU DO NOT NEED TO EDIT THIS CODE
+      if (!/(&|\?)username=/.test(window.location.search)) {
+        var newSearch = window.location.search;
+        if (newSearch !== '' & newSearch !== '?') {
+          newSearch += '&';
+        }
+        newSearch += 'username=' + (prompt('What is your name?') || 'anonymous');
+        window.location.search = newSearch;
+      }
+    </script>
+    <!-- your scripts -->
+    <script src="../dummyData.js"></script>
+    <script src="scripts/app.js"></script>
+  </head>
+  <body>
+    <div style="padding: 20px">
+      <div id="borderimg2">
+        <div id="main"> 
+          <h1>chatterbox</h1>
+          <!-- Your HTML goes here! -->
+          <form action="javascript:app.handleSubmit()">
+            <input id="message" name="" type="textarea" value="Write your message here"></input>
+            <input type="submit" id="send" class="submit"></input>
+            <p style="font-family:'Krungthep'; font-size: 12pt; color: white; padding: 4px; margin-top: 16px">CHANNELS</p>
+            <select id="roomSelect"></select>
+          </form>
+        </div>
+      </div>
+      <div id="chats">
+      </div>
+    </div>
+    <script>
+      (function() {
+        app.fetch()
+      })();
+    </script>
+  </body>
+</html>

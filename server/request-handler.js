@@ -1,3 +1,6 @@
+
+
+
 /*************************************************************
 
 You should implement your request handler function in this file.
@@ -11,6 +14,10 @@ this file and include it in basic-server.js so that it actually works.
 *Hint* Check out the node module documentation at http://nodejs.org/api/modules.html.
 
 **************************************************************/
+
+var dummyData = {
+  results: []
+}
 
 var requestHandler = function(request, response) {
   // Request and Response come from node's http module.
@@ -30,7 +37,7 @@ var requestHandler = function(request, response) {
   console.log('Serving request type ' + request.method + ' for url ' + request.url);
 
   // The outgoing status.
-  var statusCode = 200;
+  // var statusCode = 200;
 
   // See the note below about CORS headers.
   var headers = defaultCorsHeaders;
@@ -39,11 +46,49 @@ var requestHandler = function(request, response) {
   //
   // You will need to change this if you are sending something
   // other than plain text, like JSON or HTML.
-  headers['Content-Type'] = 'text/plain';
+  headers['Content-Type'] = 'application/json';
 
   // .writeHead() writes to the request line and headers of the response,
   // which includes the status and all headers.
-  response.writeHead(statusCode, headers);
+
+
+
+  // If method of the request is "GET", else if method is "POST"
+  if (request.method === 'GET' && request.url === "/classes/messages" || request.url === "/") {
+    response.writeHead(200, headers);
+    response.end(JSON.stringify(dummyData));
+  } else if (request.method === 'POST' || request.method === 'OPTIONS' && request.url === "/classes/messages") {
+    var body = ''
+    request.on('data', (chunk) => body += chunk)
+    console.log('this is the request:', request)
+    console.log('this is the dummy data:', dummyData)
+    console.log('this is the data body:', body)
+    request.on('end', function () {
+      response.writeHead(201, headers);
+      dummyData.results.push(JSON.parse(body))    
+      console.log("Dummy Data After End:", dummyData)
+      response.end(JSON.stringify(dummyData));
+    });
+  } else if (request.url !== "/classes/messages" && request.url !== '/') {
+    response.writeHead(404, headers)
+    response.end();
+  }
+
+
+ 
+  
+  // Fake data for starting server example
+  // var sender = {
+  //   username: '',
+  //   roomname: '',
+  //   text: ''
+  // }
+  // sender.username = "Simon Stroh"
+  // sender.roomname = "Lobby"
+  // sender.text = "This is my first message. I would also like to say this."
+  // var results = []
+  // results.push(sender)
+  // response.write(JSON.stringify({ results: results }))
 
   // Make sure to always call response.end() - Node may not send
   // anything back to the client until you do. The string you pass to
@@ -52,7 +97,7 @@ var requestHandler = function(request, response) {
   //
   // Calling .end "flushes" the response's internal buffer, forcing
   // node to actually send all the data over to the client.
-  response.end('Hello, World!');
+  // response.end();
 };
 
 // These headers will allow Cross-Origin Resource Sharing (CORS).
@@ -71,3 +116,4 @@ var defaultCorsHeaders = {
   'access-control-max-age': 10 // Seconds.
 };
 
+module.exports.requestHandler = requestHandler
