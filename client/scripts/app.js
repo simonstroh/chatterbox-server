@@ -59,6 +59,10 @@ var app = {
       text: $('#message').val(),
       roomname: $('#roomSelect').val()
     };
+    if (messageObject.text === "") {
+      alert("You didn't send any messages!")
+      return
+    }
     var message = JSON.stringify(messageObject)
     app.send(message);
     app.renderMessage(messageObject);

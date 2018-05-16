@@ -1,3 +1,5 @@
+var fs = require('fs')
+
 var dummyData = {
   results: []
 }
@@ -10,10 +12,9 @@ var headers = {
   'access-control-max-age': 10 // Seconds.
 };
 
-var sendResponse = function(response, statusCode) {
-  statusCode = statusCode || 200
+var sendResponse = function(response, statusCode = 200, data = dummyData) {
   response.writeHead(statusCode, headers)
-  response.end(JSON.stringify(dummyData))
+  response.end(JSON.stringify(data))
 }
 
 var collectData = function(request, callback) {
@@ -41,11 +42,39 @@ var actions = {
   }
 }
 
+// var processDependency = function(url, response) {
+//   fs.readFileSync(url, function(err, data) {
+//     if (err) throw err;
+//     response.writeHead({'Content-Type': 'text/html'})
+//     response.end(data)
+//   })
+// }
+//
+// var readDependencies = {
+//   '/client/styles/styles.css': function(url, response) {
+//     processDependency(url, response)
+//   },
+//   '/client/scripts/app.js': function(url, response) {
+//     processDependency(url, response)
+//   },
+//   '/?username': function(url, response) {
+//     processDependency('Users/student/Desktop/hrsf96-chatterbox-server/client/index.html', response)
+//   },
+//   '/': function(url, response) {
+//     processDependency('Users/student/Desktop/hrsf96-chatterbox-server/client/index.html', response)
+//   }
+// }
+
 var requestHandler = function(request, response) {
   console.log('Serving request type ' + request.method + ' for url ' + request.url);
 
-  if (request.url !== "/classes/messages" && request.url !== "/") {
-    sendResponse(response, 404)
+  // var dependency = readDependencies[request.url]
+  // if (dependency) {
+  //   dependency(request.url, response)
+  // }
+
+  if (request.url !== "/classes/messages" && request.url !== "/" && request.url !== "/client/index.html") {
+    sendResponse(response, 404, "Sorry, not found.")
     return
   }
 
