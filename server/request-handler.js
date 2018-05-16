@@ -42,36 +42,8 @@ var actions = {
   }
 }
 
-// var processDependency = function(url, response) {
-//   fs.readFileSync(url, function(err, data) {
-//     if (err) throw err;
-//     response.writeHead({'Content-Type': 'text/html'})
-//     response.end(data)
-//   })
-// }
-//
-// var readDependencies = {
-//   '/client/styles/styles.css': function(url, response) {
-//     processDependency(url, response)
-//   },
-//   '/client/scripts/app.js': function(url, response) {
-//     processDependency(url, response)
-//   },
-//   '/?username': function(url, response) {
-//     processDependency('Users/student/Desktop/hrsf96-chatterbox-server/client/index.html', response)
-//   },
-//   '/': function(url, response) {
-//     processDependency('Users/student/Desktop/hrsf96-chatterbox-server/client/index.html', response)
-//   }
-// }
-
 var requestHandler = function(request, response) {
   console.log('Serving request type ' + request.method + ' for url ' + request.url);
-
-  // var dependency = readDependencies[request.url]
-  // if (dependency) {
-  //   dependency(request.url, response)
-  // }
 
   if (request.url !== "/classes/messages" && request.url !== "/" && request.url !== "/client/index.html") {
     sendResponse(response, 404, "Sorry, not found.")
@@ -86,50 +58,3 @@ var requestHandler = function(request, response) {
 };
 
 module.exports.requestHandler = requestHandler
-
-// if (request.method === 'GET' && request.url === "/classes/messages" || request.url === "/") {
-//   response.writeHead(200, headers);
-//   response.end(JSON.stringify(dummyData));
-// } else if (request.method === 'POST' || request.method === 'OPTIONS' && request.url === "/classes/messages") {
-//   var body = ''
-//   request.on('data', (chunk) => body += chunk)
-//   console.log('this is the request:', request)
-//   console.log('this is the dummy data:', dummyData)
-//   console.log('this is the data body:', body)
-//   request.on('end', function () {
-//     response.writeHead(201, headers);
-//     dummyData.results.push(JSON.parse(body))
-//     console.log("Dummy Data After End:", dummyData)
-//     response.end(JSON.stringify(dummyData));
-//   });
-// } else if (request.url !== "/classes/messages" && request.url !== '/') {
-//   response.writeHead(404, headers)
-//   response.end();
-// }
-
-
-// Create parsed url
-// var parsedUrl = url.parse(request.url);
-
-// // Convert parsed url into pathname
-// var pathname = request.url;
-
-// // Check if file system exists for pathname
-// fs.exists(pathname, function(exists){
-//   if (!exists) {
-//     response.writeHead(404, headers)
-//     response.end();
-//     return;
-//   }
-//   if (fs.statSync(pathname).isDirectory()) {
-//     pathname += '../client/index.html';
-//   }
-//   fs.readFile(pathname, function(error, data) {
-//     if (error) {
-//       console.log(pathname)
-//     } else {
-//       response.setHeader(headers)
-//       response.end(data)
-//     }
-//   })
-// })
